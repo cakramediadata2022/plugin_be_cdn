@@ -5,233 +5,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CKH Booking Engine - Development Preview</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ckh-primary': '#007bff',
+                        'ckh-secondary': '#6c757d',
+                    }
+                }
+            }
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #007bff;
-        }
-
-        .header h1 {
-            color: #007bff;
-            margin: 0;
-        }
-
-        .header p {
-            color: #666;
-            margin: 10px 0 0 0;
-        }
-
-        .demo-section {
-            margin: 30px 0;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: #f9f9f9;
-        }
-
-        .demo-section h3 {
-            margin-top: 0;
-            color: #333;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 10px;
-        }
-
-        .code-example {
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            margin: 10px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-        }
-
-        .controls {
-            margin: 20px 0;
-            padding: 15px;
-            background: #e3f2fd;
-            border-radius: 5px;
-        }
-
-        .controls button {
-            margin: 5px 10px 5px 0;
-            padding: 10px 20px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .controls button:hover {
-            background: #0056b3;
-        }
-
-        .controls button.secondary {
-            background: #6c757d;
-        }
-
-        .controls button.secondary:hover {
-            background: #545b62;
-        }
-
-        #booking-container-1,
-        #booking-container-2 {
-            margin: 20px 0;
-            min-height: 200px;
-        }
-
-        .status {
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .status.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .status.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .status.info {
-            background: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-        }
-    </style>
+    </script>
 </head>
 
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>🏨 CKH Booking Engine</h1>
-            <p>Development Preview & Testing Environment</p>
-            <p><strong>Version:</strong> <span id="version"></span></p>
+<body class="bg-gray-100 font-sans leading-relaxed p-5">
+    <div class="max-w-6xl mx-auto bg-white p-5 rounded-lg shadow-xl">
+        <div class="text-center mb-8 pb-5 border-b-2 border-ckh-primary">
+            <h1 class="text-ckh-primary text-4xl font-bold mb-2">🏨 CKH Booking Engine</h1>
+            <p class="text-gray-600 mb-2">Development Preview & Testing Environment</p>
+            <p class="text-gray-700"><strong>Version:</strong> <span id="version" class="font-mono"></span></p>
         </div>
 
-        <div class="demo-section">
-            <h3>📋 Basic Implementation</h3>
-            <p>This demonstrates the basic usage of the CKH Booking Engine with default options.</p>
-
-            <div class="code-example">
-                // Basic usage
-                const bookingEngine = new CkhBookingEngine({
-                target: '#booking-container-1'
-                });
+        <div class="mb-8 p-5 border border-gray-300 rounded-lg bg-gray-50">
+            <h3 class="text-xl font-semibold mb-3 text-gray-800 border-b border-gray-300 pb-2">📋 Basic Implementation</h3>
+            <p class="mb-4 text-gray-700">This demonstrates the basic usage of the CKH Booking Engine with default options.</p>
+            
+            <div class="bg-gray-800 text-gray-200 p-4 rounded mb-4 overflow-x-auto font-mono text-sm">
+<span class="text-gray-400">// Basic usage</span><br>
+<span class="text-blue-300">const</span> <span class="text-yellow-300">bookingEngine</span> = <span class="text-blue-300">new</span> <span class="text-green-300">CkhBookingEngine</span>({<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">target</span>: <span class="text-orange-300">'#booking-container-1'</span><br>
+});
             </div>
-
-            <div class="controls">
-                <button onclick="createBasicEngine()">Initialize Basic Engine</button>
-                <button onclick="destroyBasicEngine()" class="secondary">Destroy Engine</button>
+            
+            <div class="mb-5 p-4 bg-blue-50 rounded">
+                <button onclick="createBasicEngine()" class="mr-3 mb-2 px-5 py-2 bg-ckh-primary text-white border-none rounded cursor-pointer text-sm font-medium hover:bg-blue-600 transition-colors">Initialize Basic Engine</button>
+                <button onclick="destroyBasicEngine()" class="mr-3 mb-2 px-5 py-2 bg-ckh-secondary text-white border-none rounded cursor-pointer text-sm font-medium hover:bg-gray-600 transition-colors">Destroy Engine</button>
             </div>
-
-            <div id="booking-container-1"></div>
-            <div id="status-1" class="status" style="display: none;"></div>
+            
+            <div id="booking-container-1" class="mb-5 min-h-[200px]"></div>
+            <div id="status-1" class="hidden p-3 rounded font-bold"></div>
         </div>
 
-        <div class="demo-section">
-            <h3>🎨 Customized Implementation</h3>
-            <p>This demonstrates advanced usage with custom styling, callbacks, and configuration.</p>
-
-            <div class="code-example">
-                // Advanced usage with custom options
-                const customEngine = new CkhBookingEngine({
-                target: '#booking-container-2',
-                theme: {
-                primaryColor: '#28a745',
-                secondaryColor: '#6c757d',
-                fontFamily: 'Georgia, serif',
-                borderRadius: '8px'
-                },
-                locale: 'en-US',
-                currency: 'USD',
-                debug: true,
-                callbacks: {
-                onBookingStart: () => console.log('Booking started!'),
-                onBookingComplete: (booking) => console.log('Booking completed:', booking),
-                onBookingError: (error) => console.error('Booking error:', error)
-                }
-                });
+        <div class="mb-8 p-5 border border-gray-300 rounded-lg bg-gray-50">
+            <h3 class="text-xl font-semibold mb-3 text-gray-800 border-b border-gray-300 pb-2">🎨 Customized Implementation</h3>
+            <p class="mb-4 text-gray-700">This demonstrates advanced usage with custom styling, callbacks, and configuration.</p>
+            
+            <div class="bg-gray-800 text-gray-200 p-4 rounded mb-4 overflow-x-auto font-mono text-sm">
+<span class="text-gray-400">// Advanced usage with custom options</span><br>
+<span class="text-blue-300">const</span> <span class="text-yellow-300">customEngine</span> = <span class="text-blue-300">new</span> <span class="text-green-300">CkhBookingEngine</span>({<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">target</span>: <span class="text-orange-300">'#booking-container-2'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">theme</span>: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">primaryColor</span>: <span class="text-orange-300">'#28a745'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">fontFamily</span>: <span class="text-orange-300">'Georgia, serif'</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+});
             </div>
-
-            <div class="controls">
-                <button onclick="createCustomEngine()">Initialize Custom Engine</button>
-                <button onclick="updateEngineTheme()" class="secondary">Update Theme</button>
-                <button onclick="destroyCustomEngine()" class="secondary">Destroy Engine</button>
+            
+            <div class="mb-5 p-4 bg-blue-50 rounded">
+                <button onclick="createCustomEngine()" class="mr-3 mb-2 px-5 py-2 bg-ckh-primary text-white border-none rounded cursor-pointer text-sm font-medium hover:bg-blue-600 transition-colors">Initialize Custom Engine</button>
+                <button onclick="updateEngineTheme()" class="mr-3 mb-2 px-5 py-2 bg-ckh-secondary text-white border-none rounded cursor-pointer text-sm font-medium hover:bg-gray-600 transition-colors">Update Theme</button>
+                <button onclick="destroyCustomEngine()" class="mr-3 mb-2 px-5 py-2 bg-ckh-secondary text-white border-none rounded cursor-pointer text-sm font-medium hover:bg-gray-600 transition-colors">Destroy Engine</button>
             </div>
-
-            <div id="booking-container-2"></div>
-            <div id="status-2" class="status" style="display: none;"></div>
+            
+            <div id="booking-container-2" class="mb-5 min-h-[200px]"></div>
+            <div id="status-2" class="hidden p-3 rounded font-bold"></div>
         </div>
 
-        <div class="demo-section">
-            <h3>🌐 CDN Usage Example</h3>
-            <p>Here's how to use the library via CDN in a regular HTML page:</p>
-
-            <div class="code-example">
-                &lt;!-- Include the CKH Booking Engine from CDN --&gt;
-                &lt;script src="https://your-cdn.com/ckh-booking-engine.umd.js"&gt;&lt;/script&gt;
-
-                &lt;!-- Your booking container --&gt;
-                &lt;div id="my-booking-engine"&gt;&lt;/div&gt;
-
-                &lt;script&gt;
-                // Library is automatically available as window.CkhBookingEngine
-                const booking = new CkhBookingEngine({
-                target: '#my-booking-engine',
-                apiEndpoint: 'https://your-api.com/booking',
-                apiKey: 'your-api-key'
-                });
-                &lt;/script&gt;
-            </div>
-        </div>
-
-        <div class="demo-section">
-            <h3>📦 NPM/Module Usage Example</h3>
-            <p>Here's how to use the library as an NPM package:</p>
-
-            <div class="code-example">
-                // Install via npm
-                npm install ckh-booking-engine
-
-                // Import in your JavaScript/TypeScript project
-                import { CkhBookingEngine } from 'ckh-booking-engine';
-                // or
-                import CkhBookingEngine from 'ckh-booking-engine';
-
-                // Use it in your application
-                const booking = new CkhBookingEngine({
-                target: document.getElementById('booking-form'),
-                theme: { primaryColor: '#ff6b6b' }
-                });
+        <div class="mb-8 p-5 border border-gray-300 rounded-lg bg-gray-50">
+            <h3 class="text-xl font-semibold mb-3 text-gray-800 border-b border-gray-300 pb-2">🌐 CDN Usage Example</h3>
+            <p class="mb-4 text-gray-700">Here's how to use the library via CDN in a regular HTML page:</p>
+            
+            <div class="bg-gray-800 text-gray-200 p-4 rounded mb-4 overflow-x-auto font-mono text-sm">
+<span class="text-gray-400">&lt;!-- Include the CKH Booking Engine from CDN --&gt;</span><br>
+<span class="text-blue-300">&lt;script</span> <span class="text-red-300">src</span>=<span class="text-orange-300">"https://your-cdn.com/ckh-booking-engine.umd.js"</span><span class="text-blue-300">&gt;&lt;/script&gt;</span><br><br>
+<span class="text-gray-400">&lt;!-- Your booking container --&gt;</span><br>
+<span class="text-blue-300">&lt;div</span> <span class="text-red-300">id</span>=<span class="text-orange-300">"my-booking-engine"</span><span class="text-blue-300">&gt;&lt;/div&gt;</span><br><br>
+<span class="text-blue-300">&lt;script&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">const</span> <span class="text-yellow-300">booking</span> = <span class="text-blue-300">new</span> <span class="text-green-300">CkhBookingEngine</span>({<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">target</span>: <span class="text-orange-300">'#my-booking-engine'</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;});<br>
+<span class="text-blue-300">&lt;/script&gt;</span>
             </div>
         </div>
     </div>
@@ -253,12 +109,21 @@
         function showStatus(containerId, message, type = 'info') {
             const statusEl = document.getElementById(`status-${containerId}`);
             statusEl.textContent = message;
-            statusEl.className = `status ${type}`;
-            statusEl.style.display = 'block';
-
+            statusEl.className = `p-3 rounded font-bold ${getStatusClasses(type)}`;
+            statusEl.classList.remove('hidden');
+            
             setTimeout(() => {
-                statusEl.style.display = 'none';
+                statusEl.classList.add('hidden');
             }, 3000);
+        }
+
+        function getStatusClasses(type) {
+            switch(type) {
+                case 'success': return 'bg-green-100 text-green-800 border border-green-200';
+                case 'error': return 'bg-red-100 text-red-800 border border-red-200';
+                case 'info': return 'bg-blue-100 text-blue-800 border border-blue-200';
+                default: return 'bg-gray-100 text-gray-800 border border-gray-200';
+            }
         }
 
         function createBasicEngine() {
@@ -266,7 +131,7 @@
                 if (basicEngine) {
                     basicEngine.destroy();
                 }
-
+                
                 basicEngine = new window.CkhBookingEngine({
                     target: '#booking-container-1',
                     debug: true,
@@ -280,7 +145,7 @@
                         }
                     }
                 });
-
+                
                 showStatus('1', 'Basic booking engine initialized!', 'success');
             } catch (error) {
                 showStatus('1', `Failed to initialize: ${error.message}`, 'error');
@@ -300,7 +165,7 @@
                 if (customEngine) {
                     customEngine.destroy();
                 }
-
+                
                 customEngine = new window.CkhBookingEngine({
                     target: '#booking-container-2',
                     theme: {
@@ -309,13 +174,7 @@
                         fontFamily: 'Georgia, serif',
                         borderRadius: '8px'
                     },
-                    locale: 'en-US',
-                    currency: 'USD',
                     debug: true,
-                    customClasses: {
-                        container: 'custom-booking-container',
-                        button: 'custom-btn'
-                    },
                     callbacks: {
                         onBookingStart: () => showStatus('2', 'Custom booking search started!', 'info'),
                         onBookingComplete: (booking) => {
@@ -323,13 +182,10 @@
                         },
                         onBookingError: (error) => {
                             showStatus('2', `Error: ${error.message}`, 'error');
-                        },
-                        onDateSelect: (date) => {
-                            console.log('Date selected:', date);
                         }
                     }
                 });
-
+                
                 showStatus('2', 'Custom booking engine initialized!', 'success');
             } catch (error) {
                 showStatus('2', `Failed to initialize: ${error.message}`, 'error');
@@ -358,20 +214,6 @@
                 showStatus('2', 'Custom booking engine destroyed!', 'info');
             }
         }
-
-        // Add some custom styles for the second demo
-        const customStyles = document.createElement('style');
-        customStyles.textContent = `
-            .custom-booking-container {
-                border: 2px solid #28a745 !important;
-            }
-            .custom-btn {
-                text-transform: uppercase;
-                letter-spacing: 1px;
-            }
-        `;
-        document.head.appendChild(customStyles);
     </script>
 </body>
-
 </html>

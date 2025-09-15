@@ -1,5 +1,6 @@
 import { CkhBookingEngine } from './ckhbookingengine';
 import type { CkhBookingEngineOptions, BookingData } from './ckhbookingengine';
+import './styles.css';
 
 // Export the main class and interfaces for module usage
 export { CkhBookingEngine };
