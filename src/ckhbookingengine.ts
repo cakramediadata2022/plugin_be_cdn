@@ -299,9 +299,10 @@ export class CkhBookingEngine {
         singleMode: false,
         format: 'DD/MM/YYYY',
         autoApply: false,
+        mobileFriendly: true,
         resetButton: true,
-        numberOfMonths: 2,
-        numberOfColumns: 2,
+        numberOfMonths: window.innerWidth < 640 ? 1 : 2,
+        numberOfColumns: window.innerWidth < 640 ? 1 : 2,
       });
 
       picker.on('selected', (start, end) => {
