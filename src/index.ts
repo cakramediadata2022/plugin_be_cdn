@@ -1,5 +1,5 @@
-import { CkhBookingEngine } from './CkhBookingEngine';
-import type { CkhBookingEngineOptions, BookingData } from './CkhBookingEngine';
+import { CkhBookingEngine } from './ckhbookingengine';
+import type { CkhBookingEngineOptions, BookingData } from './ckhbookingengine';
 
 // Export the main class and interfaces for module usage
 export { CkhBookingEngine };
