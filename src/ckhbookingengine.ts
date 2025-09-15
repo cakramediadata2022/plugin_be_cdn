@@ -1,3 +1,6 @@
+import Litepicker from 'litepicker';
+import 'litepicker/dist/css/litepicker.css';
+
 /**
  * Configuration options for the CKH Booking Engine
  */
@@ -160,54 +163,95 @@ export class CkhBookingEngine {
     // Set CSS custom properties for theming
     this.setCSSCustomProperties();
 
-    const html = `
-      <div class="ckh-booking-form">
-        <div class="ckh-form-header">
-          <h3>Book Your Stay</h3>
+      const html = `
+    <div class="ckh-booking-form">
+
+  <div class="ckh-form-body">
+    <!-- Side by side row -->
+    <div class="ckh-form-row flex gap-4">
+      <!-- Date -->
+      <div class="ckh-form-group flex-1">
+        <label for="ckh-daterange">Check in / Check Out Date</label>
+        <input
+          type="text"
+          id="ckh-daterange"
+          class="ckh-input ${this.options.customClasses?.input || ''}"
+          readonly
+        />
+      </div>
+
+      <!-- Guests Dropdown -->
+      <div class="ckh-form-group flex-1 relative">
+        <label>Guests & Rooms</label>
+        <div
+          id="ckh-guests-toggle"
+          class="ckh-input cursor-pointer bg-white border rounded px-3 py-2"
+        >
+          <span id="ckh-guests-summary">1 Adult, 0 Children, 1 Room</span>
         </div>
-        
-        <div class="ckh-form-body">
-          <div class="ckh-form-row">
-            <div class="ckh-form-group">
-              <label for="ckh-checkin">Check-in Date</label>
-              <input type="date" id="ckh-checkin" class="ckh-input ${this.options.customClasses?.input || ''}" required>
-            </div>
-            <div class="ckh-form-group">
-              <label for="ckh-checkout">Check-out Date</label>
-              <input type="date" id="ckh-checkout" class="ckh-input ${this.options.customClasses?.input || ''}" required>
-            </div>
-          </div>
-          
-          <div class="ckh-form-row">
-            <div class="ckh-form-group">
-              <label for="ckh-guests">Guests</label>
-              <select id="ckh-guests" class="ckh-input ${this.options.customClasses?.input || ''}">
-                <option value="1">1 Guest</option>
-                <option value="2">2 Guests</option>
-                <option value="3">3 Guests</option>
-                <option value="4">4 Guests</option>
-                <option value="5">5+ Guests</option>
-              </select>
-            </div>
-            <div class="ckh-form-group">
-              <label for="ckh-rooms">Rooms</label>
-              <select id="ckh-rooms" class="ckh-input ${this.options.customClasses?.input || ''}">
-                <option value="1">1 Room</option>
-                <option value="2">2 Rooms</option>
-                <option value="3">3 Rooms</option>
-                <option value="4">4+ Rooms</option>
-              </select>
+
+        <!-- Dropdown Panel -->
+        <div
+          id="ckh-guests-dropdown"
+          class="absolute z-10 mt-2 w-full bg-white border rounded-lg shadow-lg p-4 space-y-3 hidden"
+        >
+          <!-- Adults -->
+          <div class="flex items-center justify-between">
+            <span>Adults</span>
+            <div class="flex items-center gap-2">
+              <button type="button" id="ckh-adults-minus" class="px-2 py-1 border rounded">-</button>
+              <span id="ckh-adults-count">1</span>
+              <button type="button" id="ckh-adults-plus" class="px-2 py-1 border rounded">+</button>
             </div>
           </div>
-          
-          <div class="ckh-form-actions">
-            <button type="button" id="ckh-search-btn" class="ckh-btn ckh-btn-primary ${this.options.customClasses?.button || ''}">
-              Search Available Rooms
-            </button>
+
+          <!-- Children -->
+          <div class="flex items-center justify-between">
+            <span>Children</span>
+            <div class="flex items-center gap-2">
+              <button type="button" id="ckh-children-minus" class="px-2 py-1 border rounded">-</button>
+              <span id="ckh-children-count">0</span>
+              <button type="button" id="ckh-children-plus" class="px-2 py-1 border rounded">+</button>
+            </div>
+          </div>
+
+          <!-- Rooms -->
+          <div class="flex items-center justify-between">
+            <span>Rooms</span>
+            <div class="flex items-center gap-2">
+              <button type="button" id="ckh-rooms-minus" class="px-2 py-1 border rounded">-</button>
+              <span id="ckh-rooms-count">1</span>
+              <button type="button" id="ckh-rooms-plus" class="px-2 py-1 border rounded">+</button>
+            </div>
+          </div>
+
+          <!-- Pets -->
+          <hr class="my-2 border-gray-200" />
+          <div class="flex items-center justify-between">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" id="ckh-pets" class="w-4 h-4 text-blue-600 border-gray-300 rounded" />
+              <span>Pet friendly</span>
+            </label>
           </div>
         </div>
       </div>
-    `;
+    </div>
+
+    <!-- Search -->
+    <div class="ckh-form-actions mt-4">
+      <button
+        type="button"
+        id="ckh-search-btn"
+        class="ckh-btn w-full rounded-lg ckh-btn-primary ${this.options.customClasses?.button || ''}"
+      >
+        Search
+      </button>
+    </div>
+  </div>
+</div>
+
+  `;
+
 
     this.container.innerHTML = html;
   }
@@ -243,26 +287,83 @@ export class CkhBookingEngine {
    */
   private attachEventListeners(): void {
     const searchBtn = document.getElementById('ckh-search-btn');
-    const checkinInput = document.getElementById('ckh-checkin') as HTMLInputElement;
-    const checkoutInput = document.getElementById('ckh-checkout') as HTMLInputElement;
+    const dateRangeInput = document.getElementById('ckh-daterange') as HTMLInputElement;
 
-    // Search button click
-    searchBtn?.addEventListener('click', () => {
-      this.handleSearch();
-    });
+    // Search button
+    searchBtn?.addEventListener('click', () => this.handleSearch());
 
-    // Date selection callbacks
-    checkinInput?.addEventListener('change', (e) => {
-      const date = new Date((e.target as HTMLInputElement).value);
-      this.options.callbacks?.onDateSelect?.(date);
-    });
+    // Litepicker
+    if (dateRangeInput) {
+      const picker = new Litepicker({
+        element: dateRangeInput,
+        singleMode: false,
+        format: 'DD/MM/YYYY',
+        autoApply: false,
+        resetButton: true,
+        numberOfMonths: 2,
+        numberOfColumns: 2,
+      });
 
-    checkoutInput?.addEventListener('change', (e) => {
-      const date = new Date((e.target as HTMLInputElement).value);
-      this.options.callbacks?.onDateSelect?.(date);
-    });
+      picker.on('selected', (start, end) => {
+        const displayFormat = 'DD/MM/YYYY';
+
+        dateRangeInput.dataset.checkin = start.format(displayFormat);
+        dateRangeInput.dataset.checkout = end.format(displayFormat);
+
+        dateRangeInput.value = `${start.format(displayFormat)} - ${end.format(displayFormat)}`;
+      });
+
+
+      // Guests dropdown toggle
+      const toggle = document.getElementById('ckh-guests-toggle');
+      const dropdown = document.getElementById('ckh-guests-dropdown');
+      const summary = document.getElementById('ckh-guests-summary')!;
+
+      let adults = 1, children = 0, rooms = 1;
+
+      const updateSummary = () => {
+        summary.textContent = `${adults} Adult${adults > 1 ? 's' : ''}, ${children} Child${children > 1 ? 'ren' : ''}, ${rooms} Room${rooms > 1 ? 's' : ''}`;
+      };
+
+      toggle?.addEventListener('click', () => {
+        dropdown?.classList.toggle('hidden');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!dropdown?.contains(e.target as Node) && !toggle?.contains(e.target as Node)) {
+          dropdown?.classList.add('hidden');
+        }
+      });
+
+      // Counter logic
+      const setCounter = (idMinus: string, idPlus: string, get: () => number, set: (val: number) => void, min: number) => {
+        const minus = document.getElementById(idMinus);
+        const plus = document.getElementById(idPlus);
+        const el = document.getElementById(idMinus.replace('-minus', '-count'))!;
+
+        minus?.addEventListener('click', () => {
+          const val = Math.max(min, get() - 1);
+          set(val);
+          el.textContent = val.toString();
+          updateSummary();
+        });
+
+        plus?.addEventListener('click', () => {
+          const val = get() + 1;
+          set(val);
+          el.textContent = val.toString();
+          updateSummary();
+        });
+      };
+
+      setCounter('ckh-adults-minus', 'ckh-adults-plus', () => adults, (v) => adults = v, 1);
+      setCounter('ckh-children-minus', 'ckh-children-plus', () => children, (v) => children = v, 0);
+      setCounter('ckh-rooms-minus', 'ckh-rooms-plus', () => rooms, (v) => rooms = v, 1);
+
+      updateSummary();
+    }
+
   }
-
   /**
    * Handle search button click
    */
@@ -288,23 +389,26 @@ export class CkhBookingEngine {
   /**
    * Get current booking data from form
    */
-  private getBookingData(): BookingData {
-    const checkinInput = document.getElementById('ckh-checkin') as HTMLInputElement;
-    const checkoutInput = document.getElementById('ckh-checkout') as HTMLInputElement;
-    const guestsSelect = document.getElementById('ckh-guests') as HTMLSelectElement;
-    const roomsSelect = document.getElementById('ckh-rooms') as HTMLSelectElement;
+private getBookingData(): BookingData {
+  const dateRangeInput = document.getElementById('ckh-daterange') as HTMLInputElement;
+  const adults = parseInt(document.getElementById('ckh-adults-count')?.textContent || '1');
+  const children = parseInt(document.getElementById('ckh-children-count')?.textContent || '0');
+  const rooms = parseInt(document.getElementById('ckh-rooms-count')?.textContent || '1');
+  const pets = (document.getElementById('ckh-pets') as HTMLInputElement)?.checked || false;
 
-    if (!checkinInput.value || !checkoutInput.value) {
-      throw new Error('Please select check-in and check-out dates');
-    }
-
-    return {
-      checkIn: new Date(checkinInput.value),
-      checkOut: new Date(checkoutInput.value),
-      guests: parseInt(guestsSelect.value),
-      rooms: parseInt(roomsSelect.value)
-    };
+  if (!dateRangeInput.dataset.checkin || !dateRangeInput.dataset.checkout) {
+    throw new Error('Please select check-in and check-out dates');
   }
+
+  return {
+    checkIn: new Date(dateRangeInput.dataset.checkin),
+    checkOut: new Date(dateRangeInput.dataset.checkout),
+    guests: adults + children,
+    rooms,
+    propertyId: pets ? 'pet-friendly' : undefined
+  };
+}
+
 
   /**
    * Process the booking (can be overridden or extended)

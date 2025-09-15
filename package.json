@@ -49,5 +49,8 @@
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vite-plugin-dts": "^3.5.1"
+  },
+  "dependencies": {
+    "litepicker": "^2.0.12"
   }
 }
