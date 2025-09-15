@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CKH Booking Engine - Development Preview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #007bff;
+        }
+
+        .header h1 {
+            color: #007bff;
+            margin: 0;
+        }
+
+        .header p {
+            color: #666;
+            margin: 10px 0 0 0;
+        }
+
+        .demo-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+
+        .demo-section h3 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .code-example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .controls {
+            margin: 20px 0;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 5px;
+        }
+
+        .controls button {
+            margin: 5px 10px 5px 0;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .controls button:hover {
+            background: #0056b3;
+        }
+
+        .controls button.secondary {
+            background: #6c757d;
+        }
+
+        .controls button.secondary:hover {
+            background: #545b62;
+        }
+
+        #booking-container-1,
+        #booking-container-2 {
+            margin: 20px 0;
+            min-height: 200px;
+        }
+
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏨 CKH Booking Engine</h1>
+            <p>Development Preview & Testing Environment</p>
+            <p><strong>Version:</strong> <span id="version"></span></p>
+        </div>
+
+        <div class="demo-section">
+            <h3>📋 Basic Implementation</h3>
+            <p>This demonstrates the basic usage of the CKH Booking Engine with default options.</p>
+
+            <div class="code-example">
+                // Basic usage
+                const bookingEngine = new CkhBookingEngine({
+                target: '#booking-container-1'
+                });
+            </div>
+
+            <div class="controls">
+                <button onclick="createBasicEngine()">Initialize Basic Engine</button>
+                <button onclick="destroyBasicEngine()" class="secondary">Destroy Engine</button>
+            </div>
+
+            <div id="booking-container-1"></div>
+            <div id="status-1" class="status" style="display: none;"></div>
+        </div>
+
+        <div class="demo-section">
+            <h3>🎨 Customized Implementation</h3>
+            <p>This demonstrates advanced usage with custom styling, callbacks, and configuration.</p>
+
+            <div class="code-example">
+                // Advanced usage with custom options
+                const customEngine = new CkhBookingEngine({
+                target: '#booking-container-2',
+                theme: {
+                primaryColor: '#28a745',
+                secondaryColor: '#6c757d',
+                fontFamily: 'Georgia, serif',
+                borderRadius: '8px'
+                },
+                locale: 'en-US',
+                currency: 'USD',
+                debug: true,
+                callbacks: {
+                onBookingStart: () => console.log('Booking started!'),
+                onBookingComplete: (booking) => console.log('Booking completed:', booking),
+                onBookingError: (error) => console.error('Booking error:', error)
+                }
+                });
+            </div>
+
+            <div class="controls">
+                <button onclick="createCustomEngine()">Initialize Custom Engine</button>
+                <button onclick="updateEngineTheme()" class="secondary">Update Theme</button>
+                <button onclick="destroyCustomEngine()" class="secondary">Destroy Engine</button>
+            </div>
+
+            <div id="booking-container-2"></div>
+            <div id="status-2" class="status" style="display: none;"></div>
+        </div>
+
+        <div class="demo-section">
+            <h3>🌐 CDN Usage Example</h3>
+            <p>Here's how to use the library via CDN in a regular HTML page:</p>
+
+            <div class="code-example">
+                &lt;!-- Include the CKH Booking Engine from CDN --&gt;
+                &lt;script src="https://your-cdn.com/ckh-booking-engine.umd.js"&gt;&lt;/script&gt;
+
+                &lt;!-- Your booking container --&gt;
+                &lt;div id="my-booking-engine"&gt;&lt;/div&gt;
+
+                &lt;script&gt;
+                // Library is automatically available as window.CkhBookingEngine
+                const booking = new CkhBookingEngine({
+                target: '#my-booking-engine',
+                apiEndpoint: 'https://your-api.com/booking',
+                apiKey: 'your-api-key'
+                });
+                &lt;/script&gt;
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>📦 NPM/Module Usage Example</h3>
+            <p>Here's how to use the library as an NPM package:</p>
+
+            <div class="code-example">
+                // Install via npm
+                npm install ckh-booking-engine
+
+                // Import in your JavaScript/TypeScript project
+                import { CkhBookingEngine } from 'ckh-booking-engine';
+                // or
+                import CkhBookingEngine from 'ckh-booking-engine';
+
+                // Use it in your application
+                const booking = new CkhBookingEngine({
+                target: document.getElementById('booking-form'),
+                theme: { primaryColor: '#ff6b6b' }
+                });
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/src/index.ts"></script>
+    <script>
+        let basicEngine = null;
+        let customEngine = null;
+
+        // Display version when available
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                if (window.CkhBookingEngine) {
+                    document.getElementById('version').textContent = window.CkhBookingEngine.getVersion();
+                }
+            }, 100);
+        });
+
+        function showStatus(containerId, message, type = 'info') {
+            const statusEl = document.getElementById(`status-${containerId}`);
+            statusEl.textContent = message;
+            statusEl.className = `status ${type}`;
+            statusEl.style.display = 'block';
+
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 3000);
+        }
+
+        function createBasicEngine() {
+            try {
+                if (basicEngine) {
+                    basicEngine.destroy();
+                }
+
+                basicEngine = new window.CkhBookingEngine({
+                    target: '#booking-container-1',
+                    debug: true,
+                    callbacks: {
+                        onBookingStart: () => showStatus('1', 'Booking search started!', 'info'),
+                        onBookingComplete: (booking) => {
+                            showStatus('1', `Booking completed for ${booking.guests} guests!`, 'success');
+                        },
+                        onBookingError: (error) => {
+                            showStatus('1', `Error: ${error.message}`, 'error');
+                        }
+                    }
+                });
+
+                showStatus('1', 'Basic booking engine initialized!', 'success');
+            } catch (error) {
+                showStatus('1', `Failed to initialize: ${error.message}`, 'error');
+            }
+        }
+
+        function destroyBasicEngine() {
+            if (basicEngine) {
+                basicEngine.destroy();
+                basicEngine = null;
+                showStatus('1', 'Basic booking engine destroyed!', 'info');
+            }
+        }
+
+        function createCustomEngine() {
+            try {
+                if (customEngine) {
+                    customEngine.destroy();
+                }
+
+                customEngine = new window.CkhBookingEngine({
+                    target: '#booking-container-2',
+                    theme: {
+                        primaryColor: '#28a745',
+                        secondaryColor: '#6c757d',
+                        fontFamily: 'Georgia, serif',
+                        borderRadius: '8px'
+                    },
+                    locale: 'en-US',
+                    currency: 'USD',
+                    debug: true,
+                    customClasses: {
+                        container: 'custom-booking-container',
+                        button: 'custom-btn'
+                    },
+                    callbacks: {
+                        onBookingStart: () => showStatus('2', 'Custom booking search started!', 'info'),
+                        onBookingComplete: (booking) => {
+                            showStatus('2', `Custom booking completed! Check-in: ${booking.checkIn.toDateString()}`, 'success');
+                        },
+                        onBookingError: (error) => {
+                            showStatus('2', `Error: ${error.message}`, 'error');
+                        },
+                        onDateSelect: (date) => {
+                            console.log('Date selected:', date);
+                        }
+                    }
+                });
+
+                showStatus('2', 'Custom booking engine initialized!', 'success');
+            } catch (error) {
+                showStatus('2', `Failed to initialize: ${error.message}`, 'error');
+            }
+        }
+
+        function updateEngineTheme() {
+            if (customEngine) {
+                customEngine.updateOptions({
+                    theme: {
+                        primaryColor: '#dc3545',
+                        borderRadius: '15px',
+                        fontFamily: 'Arial, sans-serif'
+                    }
+                });
+                showStatus('2', 'Theme updated to red color scheme!', 'info');
+            } else {
+                showStatus('2', 'Please initialize the custom engine first!', 'error');
+            }
+        }
+
+        function destroyCustomEngine() {
+            if (customEngine) {
+                customEngine.destroy();
+                customEngine = null;
+                showStatus('2', 'Custom booking engine destroyed!', 'info');
+            }
+        }
+
+        // Add some custom styles for the second demo
+        const customStyles = document.createElement('style');
+        customStyles.textContent = `
+            .custom-booking-container {
+                border: 2px solid #28a745 !important;
+            }
+            .custom-btn {
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+        `;
+        document.head.appendChild(customStyles);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CKH Booking Engine - CDN Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .example-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="example-container">
+        <h1>🏨 CKH Booking Engine - CDN Example</h1>
+        <p>This page demonstrates how to use the CKH Booking Engine via CDN.</p>
+
+        <div id="booking-engine"></div>
+        <div id="status" class="status" style="display: none;"></div>
+    </div>
+
+    <!-- Load the CKH Booking Engine from local dist (simulating CDN) -->
+    <script src="./dist/ckh-booking-engine.umd.js"></script>
+
+    <script>
+        function showStatus(message, type = 'info') {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.className = `status ${type}`;
+            statusEl.style.display = 'block';
+
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 5000);
+        }
+
+        // Initialize the booking engine when the page loads
+        window.addEventListener('load', function () {
+            try {
+                // Check if CkhBookingEngine is available
+                if (typeof CkhBookingEngine === 'undefined') {
+                    showStatus('CkhBookingEngine is not loaded!', 'error');
+                    return;
+                }
+
+                // Create a new booking engine instance
+                const booking = new CkhBookingEngine({
+                    target: '#booking-engine',
+                    theme: {
+                        primaryColor: '#007bff',
+                        fontFamily: 'Arial, sans-serif',
+                        borderRadius: '6px'
+                    },
+                    debug: true,
+                    callbacks: {
+                        onBookingStart: function () {
+                            showStatus('🔍 Searching for available rooms...', 'info');
+                        },
+                        onBookingComplete: function (bookingData) {
+                            showStatus(
+                                `✅ Booking search completed! 
+                                Check-in: ${bookingData.checkIn.toDateString()}, 
+                                Check-out: ${bookingData.checkOut.toDateString()}, 
+                                Guests: ${bookingData.guests}, 
+                                Rooms: ${bookingData.rooms}`,
+                                'success'
+                            );
+                        },
+                        onBookingError: function (error) {
+                            showStatus(`❌ Booking error: ${error.message}`, 'error');
+                        },
+                        onDateSelect: function (date) {
+                            console.log('Date selected:', date);
+                        }
+                    }
+                });
+
+                showStatus('🎉 CKH Booking Engine loaded successfully!', 'success');
+
+                // Store booking instance globally for debugging
+                window.bookingInstance = booking;
+
+            } catch (error) {
+                showStatus(`❌ Failed to initialize: ${error.message}`, 'error');
+                console.error('Initialization error:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>

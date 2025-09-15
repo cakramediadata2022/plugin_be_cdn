@@ -1,0 +1,50 @@
+{
+  "name": "ckh-booking-engine",
+  "version": "1.0.0",
+  "description": "CakraHub Booking Engine Library - A versatile booking engine that can be used via CDN or as a module",
+  "main": "./dist/ckh-booking-engine.cjs.js",
+  "module": "./dist/ckh-booking-engine.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/ckh-booking-engine.es.js",
+      "require": "./dist/ckh-booking-engine.cjs.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && npm run build:types",
+    "build:types": "tsc --project tsconfig.build.json",
+    "preview": "vite preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "booking",
+    "engine",
+    "hotel",
+    "reservation",
+    "typescript",
+    "cdn",
+    "umd",
+    "cjs",
+    "amd",
+    "esm"
+  ],
+  "author": "CakraHub",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.5.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.4.0",
+    "eslint": "^8.47.0",
+    "terser": "^5.44.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5",
+    "vite-plugin-dts": "^3.5.1"
+  }
+}
