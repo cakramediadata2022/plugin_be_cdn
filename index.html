@@ -30,46 +30,66 @@
         </div>
 
         <div class="mb-8 p-5 border border-gray-300 rounded-lg bg-gray-50">
-            <h3 class="text-xl font-semibold mb-3 text-gray-800 border-b border-gray-300 pb-2">📋 Basic Implementation</h3>
-            <p class="mb-4 text-gray-700">This demonstrates the basic usage of the CKH Booking Engine with default options.</p>
-            
+            <h3 class="text-xl font-semibold mb-3 text-gray-800 border-b border-gray-300 pb-2">📋 Basic Implementation
+            </h3>
+            <p class="mb-4 text-gray-700">This demonstrates the basic usage of the CKH Booking Engine with default
+                options.</p>
+
             <div class="bg-gray-800 text-gray-200 p-4 rounded mb-4 overflow-x-auto font-mono text-sm">
-<span class="text-gray-400">// Basic usage</span><br>
-<span class="text-blue-300">const</span> <span class="text-yellow-300">bookingEngine</span> = <span class="text-blue-300">new</span> <span class="text-green-300">CkhBookingEngine</span>({<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">target</span>: <span class="text-orange-300">'#booking-container-1'</span><br>
-});
+                <span class="text-gray-400">// Basic usage</span><br>
+                <span class="text-blue-300">const</span> <span class="text-yellow-300">bookingEngine</span> = <span
+                    class="text-blue-300">new</span> <span class="text-green-300">CkhBookingEngine</span>({<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">target</span>: <span
+                    class="text-orange-300">'#booking-container-1'</span><br>
+                });
             </div>
-            
+
             <div class="mb-5 p-4 bg-blue-50 rounded">
-                <button onclick="createBasicEngine()" class="mr-3 mb-2 px-5 py-2 bg-ckh-primary text-white border-none rounded cursor-pointer text-sm font-medium hover:bg-blue-600 transition-colors">Initialize Basic Engine</button>
-                <button onclick="destroyBasicEngine()" class="mr-3 mb-2 px-5 py-2 bg-ckh-secondary text-white border-none rounded cursor-pointer text-sm font-medium hover:bg-gray-600 transition-colors">Destroy Engine</button>
+                <button onclick="createBasicEngine()"
+                    class="mr-3 mb-2 px-5 py-2 bg-ckh-primary text-white border-none rounded cursor-pointer text-sm font-medium hover:bg-blue-600 transition-colors">Initialize
+                    Basic Engine</button>
+                <button onclick="destroyBasicEngine()"
+                    class="mr-3 mb-2 px-5 py-2 bg-ckh-secondary text-white border-none rounded cursor-pointer text-sm font-medium hover:bg-gray-600 transition-colors">Destroy
+                    Engine</button>
             </div>
-            
+
             <div id="booking-container-1" class="mb-5 min-h-[200px]"></div>
             <div id="status-1" class="hidden p-3 rounded font-bold"></div>
         </div>
 
         <div class="mb-8 p-5 border border-gray-300 rounded-lg bg-gray-50">
-            <h3 class="text-xl font-semibold mb-3 text-gray-800 border-b border-gray-300 pb-2">🎨 Customized Implementation</h3>
-            <p class="mb-4 text-gray-700">This demonstrates advanced usage with custom styling, callbacks, and configuration.</p>
-            
+            <h3 class="text-xl font-semibold mb-3 text-gray-800 border-b border-gray-300 pb-2">🎨 Customized
+                Implementation</h3>
+            <p class="mb-4 text-gray-700">This demonstrates advanced usage with custom styling, callbacks, and
+                configuration.</p>
+
             <div class="bg-gray-800 text-gray-200 p-4 rounded mb-4 overflow-x-auto font-mono text-sm">
-<span class="text-gray-400">// Advanced usage with custom options</span><br>
-<span class="text-blue-300">const</span> <span class="text-yellow-300">customEngine</span> = <span class="text-blue-300">new</span> <span class="text-green-300">CkhBookingEngine</span>({<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">target</span>: <span class="text-orange-300">'#booking-container-2'</span>,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">theme</span>: {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">primaryColor</span>: <span class="text-orange-300">'#28a745'</span>,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">fontFamily</span>: <span class="text-orange-300">'Georgia, serif'</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-});
+                <span class="text-gray-400">// Advanced usage with custom options</span><br>
+                <span class="text-blue-300">const</span> <span class="text-yellow-300">customEngine</span> = <span
+                    class="text-blue-300">new</span> <span class="text-green-300">CkhBookingEngine</span>({<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">target</span>: <span
+                    class="text-orange-300">'#booking-container-2'</span>,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">theme</span>: {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">primaryColor</span>: <span
+                    class="text-orange-300">'#28a745'</span>,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">fontFamily</span>: <span
+                    class="text-orange-300">'Georgia, serif'</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                });
             </div>
-            
+
             <div class="mb-5 p-4 bg-blue-50 rounded">
-                <button onclick="createCustomEngine()" class="mr-3 mb-2 px-5 py-2 bg-ckh-primary text-white border-none rounded cursor-pointer text-sm font-medium hover:bg-blue-600 transition-colors">Initialize Custom Engine</button>
-                <button onclick="updateEngineTheme()" class="mr-3 mb-2 px-5 py-2 bg-ckh-secondary text-white border-none rounded cursor-pointer text-sm font-medium hover:bg-gray-600 transition-colors">Update Theme</button>
-                <button onclick="destroyCustomEngine()" class="mr-3 mb-2 px-5 py-2 bg-ckh-secondary text-white border-none rounded cursor-pointer text-sm font-medium hover:bg-gray-600 transition-colors">Destroy Engine</button>
+                <button onclick="createCustomEngine()"
+                    class="mr-3 mb-2 px-5 py-2 bg-ckh-primary text-white border-none rounded cursor-pointer text-sm font-medium hover:bg-blue-600 transition-colors">Initialize
+                    Custom Engine</button>
+                <button onclick="updateEngineTheme()"
+                    class="mr-3 mb-2 px-5 py-2 bg-ckh-secondary text-white border-none rounded cursor-pointer text-sm font-medium hover:bg-gray-600 transition-colors">Update
+                    Theme</button>
+                <button onclick="destroyCustomEngine()"
+                    class="mr-3 mb-2 px-5 py-2 bg-ckh-secondary text-white border-none rounded cursor-pointer text-sm font-medium hover:bg-gray-600 transition-colors">Destroy
+                    Engine</button>
             </div>
-            
+
             <div id="booking-container-2" class="mb-5 min-h-[200px]"></div>
             <div id="status-2" class="hidden p-3 rounded font-bold"></div>
         </div>
@@ -77,17 +97,24 @@
         <div class="mb-8 p-5 border border-gray-300 rounded-lg bg-gray-50">
             <h3 class="text-xl font-semibold mb-3 text-gray-800 border-b border-gray-300 pb-2">🌐 CDN Usage Example</h3>
             <p class="mb-4 text-gray-700">Here's how to use the library via CDN in a regular HTML page:</p>
-            
+
             <div class="bg-gray-800 text-gray-200 p-4 rounded mb-4 overflow-x-auto font-mono text-sm">
-<span class="text-gray-400">&lt;!-- Include the CKH Booking Engine from CDN --&gt;</span><br>
-<span class="text-blue-300">&lt;script</span> <span class="text-red-300">src</span>=<span class="text-orange-300">"https://your-cdn.com/ckh-booking-engine.umd.js"</span><span class="text-blue-300">&gt;&lt;/script&gt;</span><br><br>
-<span class="text-gray-400">&lt;!-- Your booking container --&gt;</span><br>
-<span class="text-blue-300">&lt;div</span> <span class="text-red-300">id</span>=<span class="text-orange-300">"my-booking-engine"</span><span class="text-blue-300">&gt;&lt;/div&gt;</span><br><br>
-<span class="text-blue-300">&lt;script&gt;</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">const</span> <span class="text-yellow-300">booking</span> = <span class="text-blue-300">new</span> <span class="text-green-300">CkhBookingEngine</span>({<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">target</span>: <span class="text-orange-300">'#my-booking-engine'</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;});<br>
-<span class="text-blue-300">&lt;/script&gt;</span>
+                <span class="text-gray-400">&lt;!-- Include the CKH Booking Engine from CDN --&gt;</span><br>
+                <span class="text-blue-300">&lt;script</span> <span class="text-red-300">src</span>=<span
+                    class="text-orange-300">"https://your-cdn.com/ckh-booking-engine.umd.js"</span><span
+                    class="text-blue-300">&gt;&lt;/script&gt;</span><br><br>
+                <span class="text-gray-400">&lt;!-- Your booking container --&gt;</span><br>
+                <span class="text-blue-300">&lt;div</span> <span class="text-red-300">id</span>=<span
+                    class="text-orange-300">"my-booking-engine"</span><span
+                    class="text-blue-300">&gt;&lt;/div&gt;</span><br><br>
+                <span class="text-blue-300">&lt;script&gt;</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">const</span> <span
+                    class="text-yellow-300">booking</span> = <span class="text-blue-300">new</span> <span
+                    class="text-green-300">CkhBookingEngine</span>({<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">target</span>: <span
+                    class="text-orange-300">'#my-booking-engine'</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                <span class="text-blue-300">&lt;/script&gt;</span>
             </div>
         </div>
     </div>
@@ -111,14 +138,14 @@
             statusEl.textContent = message;
             statusEl.className = `p-3 rounded font-bold ${getStatusClasses(type)}`;
             statusEl.classList.remove('hidden');
-            
+
             setTimeout(() => {
                 statusEl.classList.add('hidden');
             }, 3000);
         }
 
         function getStatusClasses(type) {
-            switch(type) {
+            switch (type) {
                 case 'success': return 'bg-green-100 text-green-800 border border-green-200';
                 case 'error': return 'bg-red-100 text-red-800 border border-red-200';
                 case 'info': return 'bg-blue-100 text-blue-800 border border-blue-200';
@@ -131,7 +158,7 @@
                 if (basicEngine) {
                     basicEngine.destroy();
                 }
-                
+
                 basicEngine = new window.CkhBookingEngine({
                     target: '#booking-container-1',
                     debug: true,
@@ -145,7 +172,7 @@
                         }
                     }
                 });
-                
+
                 showStatus('1', 'Basic booking engine initialized!', 'success');
             } catch (error) {
                 showStatus('1', `Failed to initialize: ${error.message}`, 'error');
@@ -165,7 +192,7 @@
                 if (customEngine) {
                     customEngine.destroy();
                 }
-                
+
                 customEngine = new window.CkhBookingEngine({
                     target: '#booking-container-2',
                     theme: {
@@ -185,7 +212,7 @@
                         }
                     }
                 });
-                
+
                 showStatus('2', 'Custom booking engine initialized!', 'success');
             } catch (error) {
                 showStatus('2', `Failed to initialize: ${error.message}`, 'error');
@@ -216,4 +243,5 @@
         }
     </script>
 </body>
+
 </html>
