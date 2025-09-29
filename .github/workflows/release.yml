@@ -35,7 +35,7 @@ jobs:
             dist/ckh-booking-engine.cjs.js
             dist/ckh-booking-engine.amd.js
             dist/style.css
-            dist/ckh-booking-engine.d.ts
+            dist/index.d.ts
           generate_release_notes: true
           draft: false
           prerelease: false
