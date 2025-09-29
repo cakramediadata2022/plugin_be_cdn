@@ -20,13 +20,25 @@ A versatile and customizable booking engine library built with TypeScript that c
 npm install ckh-booking-engine
 ```
 
-### Via CDN
+### Via CDN (jsDelivr)
 ```html
-<!-- Latest version -->
-<script src="https://your-cdn.com/ckh-booking-engine.umd.js"></script>
+<!-- CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cakramediadata2022/plugin_be_cdn@latest/dist/style.css">
 
-<!-- Specific version -->
-<script src="https://your-cdn.com/ckh-booking-engine@1.0.0.umd.js"></script>
+<!-- JavaScript - Latest version -->
+<script src="https://cdn.jsdelivr.net/gh/cakramediadata2022/plugin_be_cdn@latest/dist/ckh-booking-engine.umd.js"></script>
+
+<!-- JavaScript - Specific version (recommended for production) -->
+<script src="https://cdn.jsdelivr.net/gh/cakramediadata2022/plugin_be_cdn@v1.0.0/dist/ckh-booking-engine.umd.js"></script>
+```
+
+### Via unpkg (NPM CDN)
+```html
+<!-- CSS -->
+<link rel="stylesheet" href="https://unpkg.com/ckh-booking-engine@latest/dist/style.css">
+
+<!-- JavaScript -->
+<script src="https://unpkg.com/ckh-booking-engine@latest/dist/ckh-booking-engine.umd.js"></script>
 ```
 
 ## 🔧 Basic Usage
@@ -37,15 +49,21 @@ npm install ckh-booking-engine
 <html>
 <head>
     <title>My Hotel Booking</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cakramediadata2022/plugin_be_cdn@latest/dist/style.css">
 </head>
 <body>
     <div id="booking-form"></div>
     
-    <script src="https://your-cdn.com/ckh-booking-engine.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/cakramediadata2022/plugin_be_cdn@latest/dist/ckh-booking-engine.umd.js"></script>
     <script>
         // Library automatically available as window.CkhBookingEngine
         const booking = new CkhBookingEngine({
-            target: '#booking-form'
+            target: 'booking-form',
+            apiKey: 'your-api-key', // Optional
+            autoSearch: true,
+            callbacks: {
+                onBookingComplete: (data) => console.log('Booking completed:', data)
+            }
         });
     </script>
 </body>
@@ -354,6 +372,43 @@ After building, the following files will be generated in the `dist/` folder:
 #### Types
 - `CkhBookingEngineOptions` - Configuration interface
 - `BookingData` - Booking information interface
+
+## 🔧 Development
+
+### Local Development
+```bash
+# Install dependencies
+npm install
+
+# Start development server (with hot reload)
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+
+# Type checking
+npm run type-check
+```
+
+### Testing the Plugin
+1. Run `npm run dev` to start the development server
+2. Open `http://localhost:5173` in your browser
+3. Test different configurations and API integrations
+4. Use the built-in testing environment with:
+   - Basic implementation testing
+   - Custom theme testing  
+   - API key testing (live and demo modes)
+   - CDN usage examples
+
+### Development Features
+- 🔄 **Hot Reload**: Automatic refresh on code changes
+- 🐛 **Debug Mode**: Enable with `debug: true` for console logging
+- 🎭 **Demo Mode**: Test without API key using sample data
+- 🔑 **API Testing**: Test with real API keys in development
+- 📱 **Responsive Testing**: Test across different screen sizes
 
 ## 🤝 Contributing
 
