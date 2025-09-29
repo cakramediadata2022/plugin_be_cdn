@@ -36,6 +36,7 @@
             // Create a new instance of the booking engine
             const bookingEngine = new CkhBookingEngine({
                 target: 'booking-container',
+                apiKey: '5zuRq-0d4Tf-831ii-vZqPJ-zJdNG-Pidcc', // Optional - uncomment to enable real API calls
                 theme: {
                     primaryColor: '#3b82f6',
                     secondaryColor: '#64748b',
@@ -44,24 +45,31 @@
                 },
                 locale: 'en-US',
                 currency: 'USD',
-                dateFormat: 'MM/dd/yyyy',
+                // dateFormat: 'MM/dd/yyyy',
+                // redirectUrl: 'https://yourwebsite.com/booking-success', // Optional - defaults to https://cakrasoft.net/confirmation-payment
+                // autoSearch: true, // Optional - automatically search for rooms on load (default: true)
                 debug: true,
-                callbacks: {
-                    onBookingStart: function () {
-                        console.log('Booking search started...');
-                    },
-                    onBookingComplete: function (bookingData) {
-                        console.log('Booking completed:', bookingData);
-                        alert(`Booking successful!\n\nDetails:\nCheck-in: ${bookingData.checkIn.toLocaleDateString()}\nCheck-out: ${bookingData.checkOut.toLocaleDateString()}\nGuests: ${bookingData.guests}\nRooms: ${bookingData.rooms}`);
-                    },
-                    onBookingError: function (error) {
-                        console.error('Booking error:', error);
-                        alert('Booking error: ' + error.message);
-                    },
-                    onDateSelect: function (date) {
-                        console.log('Date selected:', date);
-                    }
-                }
+                // callbacks: {
+                //     onBookingStart: function () {
+                //         console.log('Booking search started...');
+                //     },
+                //     onBookingComplete: function (bookingData) {
+                //         console.log('Booking completed:', bookingData);
+                //         const mode = bookingData.status === 'demo' ? 'Demo Mode' : 'Live Mode';
+                //         const message = bookingData.status === 'demo' ?
+                //             '\n\nNote: This is demo mode. Add an API key to fetch real availability.' :
+                //             '\n\nBooking processed with API integration.';
+
+                //         alert(`Booking successful! (${mode})\n\nDetails:\nCheck-in: ${bookingData.checkIn.toLocaleDateString()}\nCheck-out: ${bookingData.checkOut.toLocaleDateString()}\nGuests: ${bookingData.guests}\nRooms: ${bookingData.rooms}${message}`);
+                //     },
+                //     onBookingError: function (error) {
+                //         console.error('Booking error:', error);
+                //         alert('Booking error: ' + error.message);
+                //     },
+                //     onDateSelect: function (date) {
+                //         console.log('Date selected:', date);
+                //     }
+                // }
             });
 
             console.log('CKH Booking Engine initialized successfully');
