@@ -25,7 +25,18 @@ jobs:
         
       - name: Build project
         run: npm run build
-        
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Commit dist files
+        run: |
+          git add dist/
+          git commit -m "chore: build dist files for release ${{ github.ref_name }}" || exit 0
+          git push
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
@@ -36,6 +47,15 @@ jobs:
             dist/ckh-booking-engine.amd.js
             dist/style.css
             dist/index.d.ts
+          body: |
+            ## CDN Usage:
+            ```html
+            <!-- CSS -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cakramediadata2022/plugin_be_cdn@${{ github.ref_name }}/dist/style.css">
+            
+            <!-- JavaScript -->
+            <script src="https://cdn.jsdelivr.net/gh/cakramediadata2022/plugin_be_cdn@${{ github.ref_name }}/dist/ckh-booking-engine.umd.js"></script>
+            ```
           generate_release_notes: true
           draft: false
           prerelease: false
